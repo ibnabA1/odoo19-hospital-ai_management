@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--it means do not remove whitespace inside the template-->
+
+<!--used by javascript frontend components the other xml files where to define the backend but this one is to for frontend-->
+
+<!--                        QWEB TEMPLATE-->
+<templates xml:space="preserve">
+<!-- the t inside the odoo is like a container like div but it also allows you to enter programming logic in xml eg like running a loop 
+
+<t t-foreach="patients" t-as="p">
+    <div>
+        <t t-esc="p.name"/>
+    </div>
+</t>-->
+
+    
+<!--name of the template to link it with js for rendering-->
+    <t t-name="list_view_template">
+        <div class="custom-list-container">
+
+            <h1 class="custom-title">Custom List View</h1>
+            <p class="custom-description">This is a custom list view template.</p>
+
+            <div class="table-wrapper">
+
+
+                <button t-on-click="() => this.showCreateForm()">Create Patient</button>
+
+                <table class="custom-table">
+
+                    <thead class="table-head">
+                        <tr class="table-header-row">
+                            <th class="table-header">ID</th>
+                            <th class="table-header">Name</th>
+                            <th class="table-header">Date of Birth</th>
+                            <th class="table-header">Gender</th>
+                            <th class="table-header">Actions</th>
+
+                        </tr>
+                    </thead>
+
+                    <tbody class="table-body">
+                    <!--odoo internally assigns keys to each row  1, 2, 3-->
+
+                    <!--state is an object of OWL framewrok which stores dynamic data of the component it means if something inside the state changes the ui automatically renders-->
+                        <t t-foreach="state.records" t-as="record" t-key="record.id">
+                            <tr class="table-row">
+                                <td class="table-cell"><t t-esc="record.id"/></td>
+                                
+                                <td class="table-cell"><t t-esc="record.name"/></td>
+                                <td class="table-cell"><t t-esc="record.date_of_birth ? record.date_of_birth : ''"/></td>
+                                <td class="table-cell"><t t-esc="record.gender ? record.gender : ''"/></td>
+
+
+                                <td class="table-cell">
+                                <button t-on-click="() => this.editRecord(record)">Edit</button>
+                                <button t-on-click="() => this.deleteRecord(record.id)">Delete</button>
+                                </td>
+
+
+                            </tr>
+                        </t>
+                    </tbody>
+
+                </table>
+
+
+
+
+
+                <t t-if="state.showForm">
+                    <div class="popup-form">
+                        <label>Name: <input t-model="state.form.name"/></label>
+                        <label>DOB: <input type="date" t-model="state.form.date_of_birth"/></label>
+                        <label>Gender:
+                            <select t-model="state.form.gender">
+                                <option value="">Select</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                            </select>
+                        </label>
+                        <button t-on-click="saveRecord">Save</button>
+                        <button t-on-click="() => state.showForm = false">Cancel</button>
+                    </div>
+                </t>
+
+
+
+
+            </div>
+
+        </div>
+
+    
+
+        
+
+       
+
+    </t>
+    
+</templates>

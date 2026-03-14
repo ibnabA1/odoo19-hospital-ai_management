@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <!--menu shown in dashboard
+    id which is shown in database-->
+
+    <menuitem id= "menu_hospital_root"
+        name="HMS"
+        sequence="35"
+        />
+
+
+    <menuitem id= "menu_frontdesk"
+        name="Front Desk"
+        parent="menu_hospital_root"/>
+
+    <menuitem id= "menu_patients"
+        name="Patients"
+        parent="menu_frontdesk"
+        action="action_hospital_patient"
+        />
+
+    <menuitem id= "view_patients_readonly"
+        name="View Patients"
+        parent="menu_frontdesk"
+        action="action_hospital_readonly_patient"
+        />
+
+    <menuitem id= "menu_appointments"
+        name="Appointments"
+        parent="menu_frontdesk"
+        action="action_hospital_appointment"
+        />
+
+    <menuitem id= "menu_configuration"
+        name="Configuration"
+        sequence="100"
+        parent="menu_hospital_root"
+         />
+
+    <menuitem id= "menu_patient_tag"
+        name="Tags"
+        parent="menu_configuration"
+         action="action_patient_tag"
+         />
+
+    
+    <record id="list_view_action" model="ir.actions.client">
+        <field name="name">Patients List View</field>
+
+        <!--name of javascript function to call ie tag-->
+        <field name="tag">list_view_action</field>
+    </record>
+
+
+    <menuitem id= "custom_list_view"
+        name="Patients List View"
+        parent="menu_frontdesk"
+        action="list_view_action"
+        />
+        
+    
+
+
+</odoo>
