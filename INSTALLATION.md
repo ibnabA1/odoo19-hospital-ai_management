@@ -28,7 +28,7 @@ Optional (recommended):
 Clone the GitHub repository to your local machine.
 
 ```bash
-git clone https://github.com/<your-username>/odoo19-hospital-management.git
+git clone https://github.com/ibnabA1/odoo19-hospital-management.git
 ```
 
 Move into the project directory.
